@@ -143,6 +143,29 @@ FROM dbo.PerformanceLog
 GROUP BY BatchNumber
 ORDER BY BatchNumber DESC;
 ```
+USE msdb;
+GO
+
+-- Step 3: Create a fresh uniquely named schedule
+EXEC sp_add_schedule
+    @schedule_name        = N'PerfTest_Every15Sec',   -- unique name
+    @freq_type            = 4,     -- daily (repeats every day)
+    @freq_interval        = 1,
+    @freq_subday_type     = 2,     -- unit = seconds
+    @freq_subday_interval = 15,    -- every 15 seconds
+    @active_start_time    = 0,
+    @active_end_time      = 235959;
+GO
+
+-- Step 4: Attach new schedule to the job
+EXEC sp_attach_schedule
+    @job_name      = N'PerfTest_InsertEvery2Sec',
+    @schedule_name = N'PerfTest_Every15Sec';
+GO
+
+-- Step 5: Restart the job
+EXEC sp_start_job @job_name = N'PerfTest_InsertEvery2Sec';
+GO
 
 ---
 
