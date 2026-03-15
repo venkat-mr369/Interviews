@@ -7,7 +7,7 @@ Now here are all the scripts in order:
 ### Step 1 — Create the table
 
 ```sql
-USE YourDatabaseName;  -- change this
+USE testdb;  -- change this
 GO
 
 CREATE TABLE dbo.PerformanceLog (
@@ -85,7 +85,7 @@ EXEC sp_add_jobstep
     @step_name       = N'Execute Insert Proc',
     @subsystem       = N'TSQL',
     @command         = N'EXEC dbo.usp_InsertPerfLog;',
-    @database_name   = N'YourDatabaseName',   -- change this
+    @database_name   = N'testdb',   -- change this
     @on_success_action = 1,  -- quit with success
     @on_fail_action    = 2;  -- quit with failure
 GO
