@@ -169,6 +169,19 @@ GO
 EXEC sp_start_job @job_name = N'PerfTest_InsertEvery2Sec';
 GO
 ```
+-- Confirm schedule settings on your job
+```sql
+SELECT
+    j.name              AS JobName,
+    s.name              AS ScheduleName,
+    s.freq_subday_type,        -- 2 = seconds
+    s.freq_subday_interval     -- should be 15
+FROM msdb.dbo.sysjobs         j
+JOIN msdb.dbo.sysjobschedules js ON j.job_id = js.job_id
+JOIN msdb.dbo.sysschedules    s  ON js.schedule_id = s.schedule_id
+WHERE j.name = N'PerfTest_InsertEvery2Sec';
+```
+
 ---
 
 ### Step 5 — Stop / Cleanup when done
