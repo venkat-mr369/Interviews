@@ -143,6 +143,8 @@ FROM dbo.PerformanceLog
 GROUP BY BatchNumber
 ORDER BY BatchNumber DESC;
 ```
+
+```sql
 USE msdb;
 GO
 
@@ -166,7 +168,7 @@ GO
 -- Step 5: Restart the job
 EXEC sp_start_job @job_name = N'PerfTest_InsertEvery2Sec';
 GO
-
+```
 ---
 
 ### Step 5 — Stop / Cleanup when done
