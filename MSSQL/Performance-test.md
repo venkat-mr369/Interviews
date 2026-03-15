@@ -2,7 +2,6 @@ Here's the complete setup — table creation, stored procedure, and SQL Agent jo
 Let me first show you the architecture, then give you all the scripts.
 Now here are all the scripts in order:
 
-
 ---
 
 ### Step 1 — Create the table
