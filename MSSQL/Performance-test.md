@@ -1,4 +1,4 @@
-Here's the complete setup — table creation, stored procedure, and SQL Agent job scheduling. 
+Table creation, stored procedure, and SQL Agent job scheduling. 
 Let me first show you the architecture, then give you all the scripts.
 Now here are all the scripts in order:
 
@@ -201,7 +201,7 @@ TRUNCATE TABLE dbo.PerformanceLog;
 
 ---
 
-**Key points to remember:**
+**Key Points to Remember:**
 
 The stored proc uses `WHILE + WAITFOR DELAY '00:00:02'` so each job execution produces **~7 inserts** spaced 2 seconds apart 
 within a 15-second window. The `BatchNumber` column ties all inserts from one job run together, 
