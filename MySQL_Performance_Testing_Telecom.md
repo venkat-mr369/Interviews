@@ -1,9 +1,9 @@
-# 📡 MySQL Server — Performance Testing Guide
-## Telecom Domain | 10,000 Records Every 2 Seconds via Event Scheduler
+### 📡 MySQL Server — Performance Testing Guide
+### Telecom Domain | 10,000 Records Every 2 Seconds via Event Scheduler
 
 ---
 
-## 📋 Overview
+### 📋 Overview
 
 | Property            | Detail                                         |
 |---------------------|------------------------------------------------|
@@ -21,7 +21,7 @@
 
 ---
 
-## 🔧 STEP 0 — Enable Event Scheduler
+### 🔧 STEP 0 — Enable Event Scheduler
 
 ```sql
 -- Check current status
@@ -37,7 +37,7 @@ SET GLOBAL event_scheduler = ON;
 
 ---
 
-## 🗂️ STEP 1 — Create Database & Telecom Table
+### 🗂️ STEP 1 — Create Database & Telecom Table
 
 > Simulates a **Call Detail Record (CDR)** table used in telecom billing systems.
 
@@ -96,7 +96,7 @@ SELECT 'Table CDR_CallRecords created successfully.' AS Status;
 
 ---
 
-## ⚙️ STEP 2 — Create Batch Counter Table
+### ⚙️ STEP 2 — Create Batch Counter Table
 
 ```sql
 USE TelecomPerfDB;
@@ -118,7 +118,7 @@ SELECT 'BatchCounter table created.' AS Status;
 
 ---
 
-## 🔧 STEP 3 — Create the Stored Procedure (Insert 10,000 Rows)
+### 🔧 STEP 3 — Create the Stored Procedure (Insert 10,000 Rows)
 
 > Uses a **helper numbers table** approach for bulk insert — fastest method in MySQL without cursors.
 
@@ -303,7 +303,7 @@ SELECT 'Stored Procedure usp_InsertCDRBatch created.' AS Status;
 
 ---
 
-## ⏱️ STEP 4 — Create Loop Procedure (Every 2 Sec for 30 Sec)
+### ⏱️ STEP 4 — Create Loop Procedure (Every 2 Sec for 30 Sec)
 
 > MySQL equivalent of `WAITFOR DELAY` is **`DO SLEEP(seconds)`**.
 
@@ -378,7 +378,7 @@ SELECT 'Wrapper Procedure usp_RunPerfTest_30Sec created.' AS Status;
 
 ---
 
-## 📅 STEP 5 — Schedule with MySQL Event Scheduler
+### 📅 STEP 5 — Schedule with MySQL Event Scheduler
 
 > MySQL Event Scheduler is the **exact equivalent of SQL Server Agent** for MySQL.
 > We create a **one-time event** that fires immediately and runs the 30-second loop.
@@ -410,7 +410,7 @@ SELECT 'Event EVT_Telecom_PerfTest scheduled successfully.' AS Status;
 
 ---
 
-## ▶️ STEP 6 — Run Manually (Alternative to Event)
+### ▶️ STEP 6 — Run Manually (Alternative to Event)
 
 > You can also call the procedure directly in a session without the Event Scheduler:
 
@@ -423,7 +423,7 @@ CALL usp_RunPerfTest_30Sec();
 
 ---
 
-## 📊 STEP 7 — Monitor & Validate Performance
+### 📊 STEP 7 — Monitor & Validate Performance
 
 ### 7.1 — Real-Time Row Count per Batch
 
@@ -568,7 +568,7 @@ LIMIT 15;
 
 ---
 
-## 🧹 STEP 8 — Cleanup After Test
+### 🧹 STEP 8 — Cleanup After Test
 
 ```sql
 USE TelecomPerfDB;
@@ -616,7 +616,7 @@ SELECT 'Test data cleared. Ready for next run.' AS Status;
 
 ---
 
-## 🔑 Key Concepts Used
+### 🔑 Key Concepts Used
 
 | Concept                        | Purpose                                                   |
 |--------------------------------|-----------------------------------------------------------|
@@ -634,7 +634,7 @@ SELECT 'Test data cleared. Ready for next run.' AS Status;
 
 ---
 
-## ⚠️ Prerequisites & Notes
+### ⚠️ Prerequisites & Notes
 
 | Requirement                  | Detail                                                           |
 |------------------------------|------------------------------------------------------------------|
@@ -676,7 +676,7 @@ event_scheduler             = ON
 
 ---
 
-## 🔄 MS SQL Server vs MySQL — Quick Reference
+### 🔄 MS SQL Server vs MySQL — Quick Reference
 
 | Feature                    | MS SQL Server                    | MySQL Equivalent                     |
 |----------------------------|----------------------------------|--------------------------------------|
